@@ -314,7 +314,7 @@ export default function Pricing() {
                     }
                   }}
                 >
-                  Order on WhatsApp
+                  Get Started
                 </a>
               </div>
             );
