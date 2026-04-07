@@ -26,6 +26,18 @@ export type Customer = {
   start_date: string | null;
   expiry_date: string | null;
   notes: string | null;
+  salesperson_id: string | null;
+  salesperson_username: string | null;
+  salesperson_name: string | null;
   created_at: string;
   updated_at: string;
+};
+
+export type Salesperson = {
+  id: string;
+  username: string;
+  password: string;
+  name: string;
+  is_admin: boolean;
+  created_at: string;
 };

@@ -68,6 +68,7 @@ type FormState = "idle" | "loading" | "success" | "error";
 export default function OrderForm() {
   const searchParams = useSearchParams();
   const initialPlan = searchParams.get("plan") || "full-monthly";
+  const repUsername = searchParams.get("rep") || "";
 
   const [selectedPlan, setSelectedPlan] = useState(
     BASE_PLANS.find((p) => p.key === initialPlan) ?? BASE_PLANS[2]
@@ -131,6 +132,7 @@ export default function OrderForm() {
             plan: `${selectedPlan.name} — $${selectedPlan.price}${selectedPlan.period}`,
             addons: selectedAddons.map((k) => ADDONS.find((a) => a.key === k)?.name).filter(Boolean),
             status: "unpaid",
+            ...(repUsername ? { rep_username: repUsername } : {}),
           }),
         }),
       ]);
