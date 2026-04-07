@@ -61,6 +61,7 @@ const addons = [
     period: "per year",
     icon: "🔞",
     desc: "Premium adult channels added to any plan.",
+    planKey: "addon-adult",
   },
   {
     name: "24/7 Channels",
@@ -68,6 +69,7 @@ const addons = [
     period: "per year",
     icon: "📡",
     desc: "Round-the-clock specialty channels, always on.",
+    planKey: "addon-247",
   },
 ];
 
@@ -373,7 +375,7 @@ export default function Pricing() {
                 }}
               >
                 <span style={{ fontSize: "28px" }}>{addon.icon}</span>
-                <div>
+                <div style={{ flex: 1 }}>
                   <div
                     style={{
                       display: "flex",
@@ -395,9 +397,38 @@ export default function Pricing() {
                       +${addon.price}/{addon.period}
                     </span>
                   </div>
-                  <p style={{ fontSize: "13px", color: "#6b7280", lineHeight: 1.5 }}>
+                  <p style={{ fontSize: "13px", color: "#6b7280", lineHeight: 1.5, marginBottom: "14px" }}>
                     {addon.desc}
                   </p>
+                  <a
+                    href={`/order?plan=${addon.planKey}`}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      fontSize: "13px",
+                      fontWeight: 700,
+                      color: "#fff",
+                      background: "var(--punch-red)",
+                      padding: "8px 16px",
+                      borderRadius: "8px",
+                      textDecoration: "none",
+                      transition: "all 0.2s",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = "var(--punch-red-dark)";
+                      (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLElement).style.background = "var(--punch-red)";
+                      (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+                    }}
+                  >
+                    Add On
+                    <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
                 </div>
               </div>
             ))}
