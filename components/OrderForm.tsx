@@ -420,17 +420,16 @@ export default function OrderForm() {
               <span style={{ fontSize: "14px", color: "#fff", fontWeight: 700 }}>${selectedPlan.price}{selectedPlan.period}</span>
             </div>
 
-            {/* Add-on lines */}
+            {/* Add-on lines — always in same unit as base plan */}
             {selectedAddons.map((key) => {
               const addon = ADDONS.find((a) => a.key === key);
               if (!addon) return null;
               return (
-                <div key={key} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
+                <div key={key} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
                   <span style={{ fontSize: "13px", color: "#6b7280" }}>{addon.icon} {addon.name}</span>
-                  <div style={{ textAlign: "right" }}>
-                    <p style={{ fontSize: "13px", color: "#9ca3af", margin: 0 }}>+${addonMonthlyRate}/mo</p>
-                    <p style={{ fontSize: "11px", color: "#4b5563", margin: 0 }}>{isYearly ? "$25/yr" : "monthly"}</p>
-                  </div>
+                  <span style={{ fontSize: "13px", color: "#9ca3af", fontWeight: 600 }}>
+                    +${isYearly ? "25/yr" : "5/mo"}
+                  </span>
                 </div>
               );
             })}
@@ -440,19 +439,42 @@ export default function OrderForm() {
 
             {/* Total */}
             <div style={{ marginBottom: "24px" }}>
-              <p style={{ fontSize: "12px", color: "#6b7280", marginBottom: "8px" }}>
+              <p style={{ fontSize: "12px", color: "#6b7280", marginBottom: "10px" }}>
                 {isYearly ? "Billed annually" : "Billed monthly"}
-                {selectedAddons.length > 0 && (isYearly ? " · Add-ons billed $25/yr each" : " · Add-ons $5/mo each")}
               </p>
-              <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
+
+              {/* Line items total */}
+              {selectedAddons.length > 0 && (
+                <div style={{ marginBottom: "12px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", color: "#6b7280", marginBottom: "4px" }}>
+                    <span>Base plan</span>
+                    <span>${selectedPlan.price}{selectedPlan.period}</span>
+                  </div>
+                  {selectedAddons.map((key) => {
+                    const addon = ADDONS.find((a) => a.key === key);
+                    if (!addon) return null;
+                    return (
+                      <div key={key} style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", color: "#6b7280", marginBottom: "4px" }}>
+                        <span>{addon.name}</span>
+                        <span>+${isYearly ? "25/yr" : "5/mo"}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Grand total */}
+              <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
                 <span style={{ fontSize: "40px", fontWeight: 900, color: "#fff", letterSpacing: "-1.5px" }}>
-                  ${selectedPlan.price}
+                  ${isYearly
+                    ? selectedPlan.price + addonTotal
+                    : selectedPlan.price + addonTotal}
                 </span>
                 <span style={{ fontSize: "14px", color: "#6b7280" }}>{selectedPlan.period}</span>
               </div>
               {selectedAddons.length > 0 && (
-                <p style={{ fontSize: "13px", color: "#FF0A2F", fontWeight: 600, marginTop: "4px" }}>
-                  + ${addonMonthlyRate}/mo per add-on ({isYearly ? `$${addonTotal}/yr total` : `$${addonTotal}/mo total`})
+                <p style={{ fontSize: "12px", color: "#4b5563", marginTop: "4px" }}>
+                  Includes {selectedAddons.length} add-on{selectedAddons.length > 1 ? "s" : ""}
                 </p>
               )}
             </div>
