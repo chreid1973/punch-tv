@@ -1,18 +1,37 @@
 import { NextRequest, NextResponse } from "next/server";
+import { supabaseAdmin } from "@/lib/supabase";
+import { encodeSession } from "@/lib/session";
 
 export async function POST(req: NextRequest) {
-  const { password } = await req.json();
+  const { username, password } = await req.json();
 
-  if (password !== process.env.ADMIN_PASSWORD) {
-    return NextResponse.json({ error: "Invalid password" }, { status: 401 });
+  if (!username || !password) {
+    return NextResponse.json({ error: "Missing credentials" }, { status: 400 });
   }
 
-  const res = NextResponse.json({ success: true });
-  res.cookies.set("admin_session", process.env.ADMIN_PASSWORD!, {
+  const { data, error } = await supabaseAdmin
+    .from("salespeople")
+    .select("id, username, name, is_admin, password")
+    .eq("username", username.toLowerCase().trim())
+    .single();
+
+  if (error || !data || data.password !== password) {
+    return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+  }
+
+  const session = encodeSession({
+    id: data.id,
+    username: data.username,
+    name: data.name,
+    is_admin: data.is_admin,
+  });
+
+  const res = NextResponse.json({ success: true, is_admin: data.is_admin });
+  res.cookies.set("admin_session", session, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    maxAge: 60 * 60 * 24 * 7,
     path: "/",
   });
 

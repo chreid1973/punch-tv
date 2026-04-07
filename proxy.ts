@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+import { decodeSession } from "@/lib/session";
 
 export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Protect all /admin routes except /admin/login
   if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) {
-    const session = req.cookies.get("admin_session")?.value;
-    const adminPassword = process.env.ADMIN_PASSWORD;
+    const sessionCookie = req.cookies.get("admin_session")?.value;
+    const session = sessionCookie ? decodeSession(sessionCookie) : null;
 
-    if (!session || session !== adminPassword) {
+    if (!session) {
       return NextResponse.redirect(new URL("/admin/login", req.url));
     }
   }
