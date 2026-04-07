@@ -153,7 +153,7 @@ export default function Hardware() {
             <div style={{ marginBottom: "20px" }}>
               <p style={{ fontSize: "11px", color: "#6b7280", marginBottom: "4px" }}>Price Range</p>
               <p style={{ fontSize: "28px", fontWeight: 900, color: "#fff", letterSpacing: "-1px" }}>
-                $100 – $200
+                $150 – $200
               </p>
             </div>
 
@@ -188,7 +188,7 @@ export default function Hardware() {
         </div>
 
         <p style={{ textAlign: "center", fontSize: "13px", color: "#4b5563" }}>
-          * Price varies based on availability. Contact us on WhatsApp for current stock.
+          * Price is $150–$200 depending on availability. Contact us on WhatsApp for current stock.
         </p>
       </div>
 
