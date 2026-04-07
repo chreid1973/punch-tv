@@ -7,6 +7,7 @@ const plans = [
     name: "TV Only",
     monthlyPrice: 15,
     yearlyPrice: null,
+    planKey: "tv-only",
     description: "All live channels, no VOD library.",
     features: [
       "5,000+ Live Channels",
@@ -22,6 +23,8 @@ const plans = [
     name: "Full Package",
     monthlyPrice: 20,
     yearlyPrice: 220,
+    planKey: "full-monthly",
+    yearlyPlanKey: "full-yearly",
     description: "Live TV + full VOD library. Best value.",
     features: [
       "Everything in TV Only",
@@ -37,6 +40,7 @@ const plans = [
     name: "VOD Only",
     monthlyPrice: 15,
     yearlyPrice: null,
+    planKey: "vod-only",
     description: "On-demand movies and TV series only.",
     features: [
       "Full Movie Library",
@@ -283,7 +287,7 @@ export default function Pricing() {
                 </ul>
 
                 <a
-                  href="#contact"
+                  href={`/order?plan=${showYearly && plan.yearlyPlanKey ? plan.yearlyPlanKey : plan.planKey}`}
                   style={{
                     display: "block",
                     textAlign: "center",
