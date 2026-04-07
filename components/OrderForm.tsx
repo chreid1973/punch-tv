@@ -320,9 +320,14 @@ export default function OrderForm() {
                       <p style={{ fontSize: "15px", fontWeight: 700, color: "#fff", margin: 0 }}>{addon.name}</p>
                       <p style={{ fontSize: "12px", color: "#6b7280", margin: 0 }}>{addon.description}</p>
                     </div>
-                    <span style={{ fontSize: "15px", fontWeight: 800, color: checked ? "#FF0A2F" : "#6b7280", whiteSpace: "nowrap" }}>
-                      +$25/yr
-                    </span>
+                    <div style={{ textAlign: "right", whiteSpace: "nowrap" }}>
+                      <p style={{ fontSize: "15px", fontWeight: 800, color: checked ? "#FF0A2F" : "#6b7280", margin: 0 }}>
+                        +$2.08/mo
+                      </p>
+                      <p style={{ fontSize: "11px", color: "#4b5563", margin: "2px 0 0" }}>
+                        billed $25/yr
+                      </p>
+                    </div>
                   </button>
                 );
               })}
@@ -408,7 +413,10 @@ export default function OrderForm() {
               return (
                 <div key={key} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
                   <span style={{ fontSize: "13px", color: "#6b7280" }}>{addon.icon} {addon.name}</span>
-                  <span style={{ fontSize: "13px", color: "#9ca3af" }}>+$25/yr</span>
+                  <div style={{ textAlign: "right" }}>
+                    <p style={{ fontSize: "13px", color: "#9ca3af", margin: 0 }}>+$2.08/mo</p>
+                    <p style={{ fontSize: "11px", color: "#4b5563", margin: 0 }}>$25/yr</p>
+                  </div>
                 </div>
               );
             })}
