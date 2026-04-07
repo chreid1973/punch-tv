@@ -111,17 +111,31 @@ export default function OrderForm() {
       .join("\n");
 
     try {
-      const res = await fetch("https://formspree.io/f/xkopyrbw", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          ...form,
-          order: orderSummary,
-          _subject: `New Order: ${selectedPlan.name} from ${form.name}`,
+      const [formspreeRes] = await Promise.all([
+        fetch("https://formspree.io/f/xkopyrbw", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            ...form,
+            order: orderSummary,
+            _subject: `New Order: ${selectedPlan.name} from ${form.name}`,
+          }),
         }),
-      });
+        fetch("/api/customers", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            phone: form.phone,
+            plan: `${selectedPlan.name} — $${selectedPlan.price}${selectedPlan.period}`,
+            addons: selectedAddons.map((k) => ADDONS.find((a) => a.key === k)?.name).filter(Boolean),
+            status: "unpaid",
+          }),
+        }),
+      ]);
 
-      if (res.ok) setFormState("success");
+      if (formspreeRes.ok) setFormState("success");
       else setFormState("error");
     } catch {
       setFormState("error");
