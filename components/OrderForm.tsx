@@ -84,9 +84,10 @@ export default function OrderForm() {
     );
   };
 
-  const addonTotal = selectedAddons.length * 25;
-  const basePrice = selectedPlan.price;
   const isYearly = selectedPlan.period === "/year";
+  const addonMonthlyRate = isYearly ? 2.08 : 5;
+  const addonTotal = selectedAddons.length * (isYearly ? 25 : 5);
+  const basePrice = selectedPlan.price;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -103,8 +104,8 @@ export default function OrderForm() {
 
     const orderSummary = [
       `Base Plan: ${selectedPlan.name} — $${selectedPlan.price}${selectedPlan.period}`,
-      addonNames ? `Add-ons: ${addonNames} — $${addonTotal}/year` : null,
-      `Total: $${basePrice}${selectedPlan.period}${addonTotal ? ` + $${addonTotal}/year add-ons` : ""}`,
+      addonNames ? `Add-ons: ${addonNames} — $${addonMonthlyRate}/mo each (${isYearly ? "$25/yr billed annually" : "$5/mo billed monthly"})` : null,
+      `Total: $${basePrice}${selectedPlan.period}${addonTotal ? ` + $${addonMonthlyRate}/mo per add-on` : ""}`,
     ]
       .filter(Boolean)
       .join("\n");
@@ -321,12 +322,25 @@ export default function OrderForm() {
                       <p style={{ fontSize: "12px", color: "#6b7280", margin: 0 }}>{addon.description}</p>
                     </div>
                     <div style={{ textAlign: "right", whiteSpace: "nowrap" }}>
-                      <p style={{ fontSize: "15px", fontWeight: 800, color: checked ? "#FF0A2F" : "#6b7280", margin: 0 }}>
-                        +$2.08/mo
-                      </p>
-                      <p style={{ fontSize: "11px", color: "#4b5563", margin: "2px 0 0" }}>
-                        billed $25/yr
-                      </p>
+                      {isYearly ? (
+                        <>
+                          <p style={{ fontSize: "15px", fontWeight: 800, color: checked ? "#FF0A2F" : "#6b7280", margin: 0 }}>
+                            +$2.08/mo
+                          </p>
+                          <p style={{ fontSize: "11px", color: "#4b5563", margin: "2px 0 0" }}>
+                            billed $25/yr
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <p style={{ fontSize: "15px", fontWeight: 800, color: checked ? "#FF0A2F" : "#6b7280", margin: 0 }}>
+                            +$5/mo
+                          </p>
+                          <p style={{ fontSize: "11px", color: "#4b5563", margin: "2px 0 0" }}>
+                            save with yearly
+                          </p>
+                        </>
+                      )}
                     </div>
                   </button>
                 );
@@ -414,8 +428,8 @@ export default function OrderForm() {
                 <div key={key} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "8px" }}>
                   <span style={{ fontSize: "13px", color: "#6b7280" }}>{addon.icon} {addon.name}</span>
                   <div style={{ textAlign: "right" }}>
-                    <p style={{ fontSize: "13px", color: "#9ca3af", margin: 0 }}>+$2.08/mo</p>
-                    <p style={{ fontSize: "11px", color: "#4b5563", margin: 0 }}>$25/yr</p>
+                    <p style={{ fontSize: "13px", color: "#9ca3af", margin: 0 }}>+${addonMonthlyRate}/mo</p>
+                    <p style={{ fontSize: "11px", color: "#4b5563", margin: 0 }}>{isYearly ? "$25/yr" : "monthly"}</p>
                   </div>
                 </div>
               );
@@ -428,7 +442,7 @@ export default function OrderForm() {
             <div style={{ marginBottom: "24px" }}>
               <p style={{ fontSize: "12px", color: "#6b7280", marginBottom: "8px" }}>
                 {isYearly ? "Billed annually" : "Billed monthly"}
-                {selectedAddons.length > 0 && " · Add-ons billed yearly"}
+                {selectedAddons.length > 0 && (isYearly ? " · Add-ons billed $25/yr each" : " · Add-ons $5/mo each")}
               </p>
               <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
                 <span style={{ fontSize: "40px", fontWeight: 900, color: "#fff", letterSpacing: "-1.5px" }}>
@@ -438,7 +452,7 @@ export default function OrderForm() {
               </div>
               {selectedAddons.length > 0 && (
                 <p style={{ fontSize: "13px", color: "#FF0A2F", fontWeight: 600, marginTop: "4px" }}>
-                  + ${addonTotal}/year in add-ons
+                  + ${addonMonthlyRate}/mo per add-on ({isYearly ? `$${addonTotal}/yr total` : `$${addonTotal}/mo total`})
                 </p>
               )}
             </div>
