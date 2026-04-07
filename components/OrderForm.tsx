@@ -10,6 +10,8 @@ const BASE_PLANS = [
     name: "TV Only",
     price: 15,
     period: "/month",
+    annualCost: 180,
+    yearlyEquivalent: null,
     description: "Live channels only",
   },
   {
@@ -17,6 +19,8 @@ const BASE_PLANS = [
     name: "VOD Only",
     price: 15,
     period: "/month",
+    annualCost: 180,
+    yearlyEquivalent: null,
     description: "Movies & series on demand",
   },
   {
@@ -24,6 +28,8 @@ const BASE_PLANS = [
     name: "Full Package",
     price: 20,
     period: "/month",
+    annualCost: 240,
+    yearlyEquivalent: 220,
     description: "Live TV + VOD — best value",
     popular: true,
   },
@@ -32,6 +38,8 @@ const BASE_PLANS = [
     name: "Full Package",
     price: 220,
     period: "/year",
+    annualCost: 220,
+    yearlyEquivalent: null,
     description: "Live TV + VOD — 1 month FREE",
   },
 ];
@@ -242,6 +250,20 @@ export default function OrderForm() {
                       ${plan.price}
                     </span>
                     <span style={{ fontSize: "12px", color: "#6b7280" }}>{plan.period}</span>
+
+                    {/* Annual cost + savings callout for monthly plans */}
+                    {plan.period === "/month" && (
+                      <div style={{ marginTop: "8px" }}>
+                        <p style={{ fontSize: "11px", color: "#4b5563", margin: 0 }}>
+                          = ${plan.annualCost}/yr
+                        </p>
+                        {plan.yearlyEquivalent && (
+                          <p style={{ fontSize: "11px", color: "#FF0A2F", fontWeight: 700, margin: "2px 0 0" }}>
+                            +${(plan.annualCost ?? 0) - plan.yearlyEquivalent} more/yr than yearly
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </button>
                 );
               })}
