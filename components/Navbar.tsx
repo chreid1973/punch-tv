@@ -15,6 +15,7 @@ export default function Navbar() {
   const navLinks = [
     { label: "Home", href: "#home" },
     { label: "Pricing", href: "#pricing" },
+    { label: "Savings Calculator", href: "#calculator" },
     { label: "Hardware", href: "#hardware" },
     { label: "Contact", href: "#contact" },
   ];
