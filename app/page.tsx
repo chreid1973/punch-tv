@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import ChannelLogos from "@/components/ChannelLogos";
 import Features from "@/components/Features";
 import Pricing from "@/components/Pricing";
 import Hardware from "@/components/Hardware";
@@ -12,6 +13,7 @@ export default function Home() {
     <main className="min-h-screen" style={{ background: "var(--background)" }}>
       <Navbar />
       <Hero />
+      <ChannelLogos />
       <hr className="section-divider" />
       <Features />
       <hr className="section-divider" />
