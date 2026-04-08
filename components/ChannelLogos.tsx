@@ -1,61 +1,81 @@
-type Channel = { name: string; color: string; bg: string };
+import Image from "next/image";
+
+const BASE_US = "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-states";
+const BASE_CA = "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/canada";
+
+type Channel = {
+  name: string;
+  logo: string; // full URL
+};
 
 const ROW_1: Channel[] = [
-  { name: "ESPN",        color: "#DD0000", bg: "#DD000022" },
-  { name: "Fox Sports",  color: "#4A90D9", bg: "#4A90D922" },
-  { name: "NFL Network", color: "#5B9BD5", bg: "#5B9BD522" },
-  { name: "NBA TV",      color: "#1D428A", bg: "#1D428A22" },
-  { name: "TSN",         color: "#5599DD", bg: "#5599DD22" },
-  { name: "beIN Sports", color: "#E4002B", bg: "#E4002B22" },
-  { name: "CNN",         color: "#CC0000", bg: "#CC000022" },
-  { name: "BBC News",    color: "#FF4444", bg: "#FF444422" },
-  { name: "Fox News",    color: "#5588CC", bg: "#5588CC22" },
-  { name: "MSNBC",       color: "#0057A3", bg: "#0057A322" },
-  { name: "HBO",         color: "#00C2FF", bg: "#00C2FF1A" },
-  { name: "Showtime",    color: "#FF3333", bg: "#FF333322" },
-  { name: "AMC",         color: "#D4A017", bg: "#D4A01722" },
-  { name: "FX",          color: "#CCCCCC", bg: "#FFFFFF10" },
-  { name: "MTV",         color: "#A259FF", bg: "#A259FF22" },
+  { name: "ESPN",         logo: `${BASE_US}/espn-us.png` },
+  { name: "Fox Sports",   logo: `${BASE_US}/fox-sports-us.png` },
+  { name: "NFL Network",  logo: `${BASE_US}/nfl-network-us.png` },
+  { name: "NBA TV",       logo: `${BASE_US}/nba-tv-us.png` },
+  { name: "TSN",          logo: `${BASE_CA}/tsn-ca.png` },
+  { name: "beIN Sports",  logo: `${BASE_US}/bein-sports-us.png` },
+  { name: "CNN",          logo: `${BASE_US}/cnn-us.png` },
+  { name: "Fox News",     logo: `${BASE_US}/fox-news-us.png` },
+  { name: "MSNBC",        logo: `${BASE_US}/msnbc-hz-us.png` },
+  { name: "HBO",          logo: `${BASE_US}/hbo-us.png` },
+  { name: "Showtime",     logo: `${BASE_US}/showtime-us.png` },
+  { name: "AMC",          logo: `${BASE_US}/amc-us.png` },
+  { name: "FX",           logo: `${BASE_US}/fx-us.png` },
+  { name: "MTV",          logo: `${BASE_US}/mtv-us.png` },
+  { name: "Paramount",    logo: `${BASE_US}/paramount-network-us.png` },
 ];
 
 const ROW_2: Channel[] = [
-  { name: "Sportsnet",      color: "#E4002B", bg: "#E4002B22" },
-  { name: "Comedy Central", color: "#FFE033", bg: "#FFE03322" },
-  { name: "Discovery",      color: "#0099D9", bg: "#0099D922" },
-  { name: "Nat Geo",        color: "#FFCC00", bg: "#FFCC0022" },
-  { name: "History",        color: "#C8A951", bg: "#C8A95122" },
-  { name: "A&E",            color: "#BFA050", bg: "#BFA05022" },
-  { name: "Bravo",          color: "#C039B0", bg: "#C039B022" },
-  { name: "Lifetime",       color: "#D4103C", bg: "#D4103C22" },
-  { name: "Hallmark",       color: "#9E3CA8", bg: "#9E3CA822" },
-  { name: "Food Network",   color: "#FF6B00", bg: "#FF6B0022" },
-  { name: "HGTV",           color: "#72BF44", bg: "#72BF4422" },
-  { name: "TLC",            color: "#009ADE", bg: "#009ADE22" },
-  { name: "Crave",          color: "#9C44C0", bg: "#9C44C022" },
-  { name: "Disney+",        color: "#1AA6E4", bg: "#1AA6E422" },
-  { name: "Netflix",        color: "#E50914", bg: "#E5091422" },
+  { name: "Sportsnet",       logo: `${BASE_CA}/sportsnet-ca.png` },
+  { name: "Comedy Central",  logo: `${BASE_US}/comedy-central-us.png` },
+  { name: "Discovery",       logo: `${BASE_US}/discovery-channel-us.png` },
+  { name: "Nat Geo",         logo: `${BASE_US}/national-geographic-us.png` },
+  { name: "History",         logo: `${BASE_US}/history-channel-us.png` },
+  { name: "A&E",             logo: `${BASE_US}/a-and-e-us.png` },
+  { name: "Bravo",           logo: `${BASE_US}/bravo-us.png` },
+  { name: "Lifetime",        logo: `${BASE_US}/lifetime-us.png` },
+  { name: "Hallmark",        logo: `${BASE_US}/hallmark-channel-us.png` },
+  { name: "Food Network",    logo: `${BASE_US}/food-network-us.png` },
+  { name: "HGTV",            logo: `${BASE_US}/hgtv-us.png` },
+  { name: "TLC",             logo: `${BASE_US}/tlc-us.png` },
+  { name: "Crave",           logo: `${BASE_CA}/crave-ca.png` },
+  { name: "Disney+",         logo: `${BASE_US}/disney-plus-us.png` },
+  { name: "CBC",             logo: `${BASE_CA}/cbc-ca.png` },
 ];
 
-function Badge({ ch }: { ch: Channel }) {
+function LogoBadge({ ch }: { ch: Channel }) {
   return (
-    <span
+    <div
       style={{
         display: "inline-flex",
         alignItems: "center",
+        justifyContent: "center",
         flexShrink: 0,
-        whiteSpace: "nowrap",
-        padding: "6px 16px",
-        borderRadius: "6px",
-        background: ch.bg,
-        border: `1px solid ${ch.color}40`,
-        color: ch.color,
-        fontSize: "13px",
-        fontWeight: 700,
-        letterSpacing: "0.03em",
+        height: "48px",
+        minWidth: "80px",
+        padding: "8px 16px",
+        background: "rgba(255,255,255,0.04)",
+        border: "1px solid rgba(255,255,255,0.07)",
+        borderRadius: "10px",
       }}
     >
-      {ch.name}
-    </span>
+      <Image
+        src={ch.logo}
+        alt={ch.name}
+        height={30}
+        width={80}
+        style={{
+          height: "30px",
+          width: "auto",
+          maxWidth: "80px",
+          objectFit: "contain",
+          filter: "brightness(0) invert(1)",
+          opacity: 0.85,
+        }}
+        unoptimized
+      />
+    </div>
   );
 }
 
@@ -64,25 +84,32 @@ export default function ChannelLogos() {
   const r2 = [...ROW_2, ...ROW_2];
 
   const maskStyle: React.CSSProperties = {
-    maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-    WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+    maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+    WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
   };
 
   const trackBase: React.CSSProperties = {
     display: "flex",
-    gap: "12px",
+    gap: "14px",
     width: "max-content",
+    alignItems: "center",
   };
 
   return (
     <section style={{ background: "#080808", padding: "64px 0 56px", overflow: "hidden" }}>
 
       {/* Heading */}
-      <div style={{ textAlign: "center", marginBottom: "40px", padding: "0 24px" }}>
-        <p style={{ fontSize: "13px", fontWeight: 600, color: "var(--punch-red)", letterSpacing: "2px", textTransform: "uppercase", marginBottom: "10px" }}>
+      <div style={{ textAlign: "center", marginBottom: "44px", padding: "0 24px" }}>
+        <p style={{
+          fontSize: "13px", fontWeight: 600, color: "var(--punch-red)",
+          letterSpacing: "2px", textTransform: "uppercase", marginBottom: "10px",
+        }}>
           Channel Lineup
         </p>
-        <h2 style={{ fontSize: "clamp(22px, 3.5vw, 36px)", fontWeight: 800, color: "#fff", letterSpacing: "-0.5px", marginBottom: "10px" }}>
+        <h2 style={{
+          fontSize: "clamp(22px, 3.5vw, 36px)", fontWeight: 800,
+          color: "#fff", letterSpacing: "-0.5px", marginBottom: "10px",
+        }}>
           10,000+ channels included
         </h2>
         <p style={{ fontSize: "15px", color: "#6b7280" }}>
@@ -94,14 +121,12 @@ export default function ChannelLogos() {
       <div style={maskStyle}>
 
         {/* Row 1 — scrolls left */}
-        <div style={{ overflow: "hidden", marginBottom: "12px" }}>
+        <div style={{ overflow: "hidden", marginBottom: "14px" }}>
           <div
             className="channel-logos-track"
-            style={{ ...trackBase, animation: "scroll-left 28s linear infinite" }}
+            style={{ ...trackBase, animation: "scroll-left 35s linear infinite" }}
           >
-            {r1.map((ch, i) => (
-              <Badge key={`r1-${i}`} ch={ch} />
-            ))}
+            {r1.map((ch, i) => <LogoBadge key={`r1-${i}`} ch={ch} />)}
           </div>
         </div>
 
@@ -109,11 +134,9 @@ export default function ChannelLogos() {
         <div style={{ overflow: "hidden" }}>
           <div
             className="channel-logos-track"
-            style={{ ...trackBase, animation: "scroll-right 32s linear infinite" }}
+            style={{ ...trackBase, animation: "scroll-right 40s linear infinite" }}
           >
-            {r2.map((ch, i) => (
-              <Badge key={`r2-${i}`} ch={ch} />
-            ))}
+            {r2.map((ch, i) => <LogoBadge key={`r2-${i}`} ch={ch} />)}
           </div>
         </div>
 
