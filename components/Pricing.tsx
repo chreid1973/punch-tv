@@ -337,7 +337,7 @@ export default function Pricing() {
 
         {/* Device bandwidth note */}
         <p style={{ textAlign: "center", fontSize: "12px", color: "#4b5563", marginTop: "14px", maxWidth: "520px", margin: "14px auto 0", lineHeight: 1.6 }}>
-          One box, one connection — simple as that. Two boxes in the same home share one connection unless both are streaming at the same time. Second home or different location? You&apos;ll need a second account.
+          One box, one connection — simple as that. Two boxes in the same home share one connection. Second home or different location (ex: cabin at the lake)? You&apos;ll need a second account.
         </p>
       </div>
     </section>
