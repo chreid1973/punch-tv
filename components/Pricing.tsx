@@ -93,8 +93,11 @@ export default function Pricing() {
           <h2 style={{ fontSize: "clamp(28px, 5vw, 44px)", fontWeight: 800, letterSpacing: "-1px", color: "#fff", marginBottom: "16px" }}>
             Simple, honest pricing
           </h2>
-          <p style={{ color: "#6b7280", fontSize: "16px", marginBottom: "32px" }}>
+          <p style={{ color: "#6b7280", fontSize: "16px", marginBottom: "12px" }}>
             No contracts. No hidden fees. Cancel anytime.
+          </p>
+          <p style={{ fontSize: "13px", color: "#4b5563", marginBottom: "32px" }}>
+            All prices in <strong style={{ color: "#6b7280" }}>CAD</strong> · Taxes included
           </p>
 
           {/* Toggle */}
@@ -305,6 +308,30 @@ export default function Pricing() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Quick-info chips */}
+        <div style={{ marginTop: "40px", display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px" }}>
+          {[
+            { icon: "💳", text: "E-transfer only" },
+            { icon: "⚡", text: "Instant activation (business hours)" },
+            { icon: "🔄", text: "Manual renewal — no auto-billing" },
+            { icon: "📧", text: "Credentials sent via email" },
+            { icon: "🔒", text: "VPN recommended" },
+          ].map((chip) => (
+            <div
+              key={chip.text}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "7px",
+                background: "#111", border: "1px solid #1e1e1e",
+                borderRadius: "100px", padding: "7px 14px",
+                fontSize: "13px", color: "#9ca3af",
+              }}
+            >
+              <span>{chip.icon}</span>
+              <span>{chip.text}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
