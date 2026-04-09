@@ -317,7 +317,7 @@ export default function Pricing() {
             { icon: "⚡", text: "Instant activation (business hours)" },
             { icon: "🔄", text: "Manual renewal — no auto-billing" },
             { icon: "📧", text: "Credentials sent via email" },
-            { icon: "📺", text: "1 box · 1 connection" },
+            { icon: "📺", text: "1 device · 1 connection" },
             { icon: "🔒", text: "VPN recommended" },
           ].map((chip) => (
             <div
@@ -337,7 +337,7 @@ export default function Pricing() {
 
         {/* Device bandwidth note */}
         <p style={{ textAlign: "center", fontSize: "12px", color: "#4b5563", marginTop: "14px", maxWidth: "520px", margin: "14px auto 0", lineHeight: 1.6 }}>
-          One box, one connection — simple as that. Two boxes in the same home share one connection. Second home or different location (ex: cabin at the lake)? You&apos;ll need a second account.
+          One device, one connection — simple as that. Two devices in the same home share one connection. Second home or different location (ex: cabin at the lake)? You&apos;ll need a second account.
         </p>
       </div>
     </section>
