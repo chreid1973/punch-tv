@@ -317,6 +317,7 @@ export default function Pricing() {
             { icon: "⚡", text: "Instant activation (business hours)" },
             { icon: "🔄", text: "Manual renewal — no auto-billing" },
             { icon: "📧", text: "Credentials sent via email" },
+            { icon: "📺", text: "Install on up to 5 devices" },
             { icon: "🔒", text: "VPN recommended" },
           ].map((chip) => (
             <div
@@ -333,6 +334,12 @@ export default function Pricing() {
             </div>
           ))}
         </div>
+
+        {/* Device bandwidth note */}
+        <p style={{ textAlign: "center", fontSize: "12px", color: "#4b5563", marginTop: "14px", maxWidth: "520px", margin: "14px auto 0", lineHeight: 1.6 }}>
+          All devices share a single connection — for the best experience we recommend 3 or fewer active devices at once.
+          Running more than 3? A second account keeps everyone buffer-free.
+        </p>
       </div>
     </section>
   );
