@@ -7,7 +7,7 @@ const features = [
       </svg>
     ),
     title: "Every Screen, Every Device*",
-    desc: "Watch on select Android TV devices*, phones, tablets, laptops, and IPTV boxes. One subscription, all your screens.",
+    desc: "Watch on our IPTV boxes, phones, tablets, laptops, and select Android TV devices*. One subscription, all your screens.",
   },
   {
     icon: (

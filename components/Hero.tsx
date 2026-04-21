@@ -199,7 +199,7 @@ export default function Hero() {
           {[
             { value: "10,000+", label: "Live Channels" },
             { value: "HD & 4K", label: "Stream Quality" },
-            { value: "Any Device*", label: "Select Android TV devices*, Phone, PC" },
+            { value: "Any Device*", label: ", IPTV Box, Phone, PC & Select Android TV devices*" },
             { value: "24/7", label: "Availability" },
           ].map((stat) => (
             <div
