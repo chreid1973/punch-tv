@@ -6,7 +6,7 @@ const features = [
         <path d="M8 21h8M12 17v4" strokeLinecap="round" />
       </svg>
     ),
-    title: "Every Screen, Every Device*",
+    title: "Every Screen, Every Device",
     desc: "Watch on our IPTV boxes, phones, tablets, laptops, and select Android TV devices*. One subscription, all your screens.",
   },
   {
