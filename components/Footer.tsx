@@ -78,6 +78,14 @@ export default function Footer() {
           &copy; {year} Punch TV. All rights reserved.
         </p>
       </div>
+
+      {/* Disclaimer */}
+      <div style={{ maxWidth: "1100px", margin: "20px auto 0", borderTop: "1px solid #1a1a1a", paddingTop: "16px" }}>
+        <p style={{ fontSize: "11px", color: "#374151", lineHeight: 1.6, textAlign: "center" }}>
+          *Some TVs may not be compatiable & will require a IPTV box or third party device for service. For entertainment purposes only. Content availability may vary by region.
+          Sports blackouts may apply on select live events. Punch TV is not affiliated with any broadcast network or streaming service.
+        </p>
+      </div>
     </footer>
   );
 }

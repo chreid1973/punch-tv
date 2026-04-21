@@ -15,6 +15,7 @@ export default function Navbar() {
   const navLinks = [
     { label: "Home", href: "#home" },
     { label: "Pricing", href: "#pricing" },
+    { label: "Savings Calculator", href: "#calculator" },
     { label: "Hardware", href: "#hardware" },
     { label: "Contact", href: "#contact" },
   ];
@@ -116,7 +117,7 @@ export default function Navbar() {
               (e.currentTarget as HTMLElement).style.transform = "scale(1)";
             }}
           >
-            Get Started
+            Order Now
           </a>
         </div>
 
@@ -194,7 +195,7 @@ export default function Navbar() {
               textAlign: "center",
             }}
           >
-            Get Started
+            Order Now
           </a>
         </div>
       )}

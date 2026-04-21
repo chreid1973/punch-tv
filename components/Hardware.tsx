@@ -182,13 +182,13 @@ export default function Hardware() {
                 (e.currentTarget as HTMLElement).style.boxShadow = "none";
               }}
             >
-              Order on WhatsApp
+              Order via Email
             </a>
           </div>
         </div>
 
         <p style={{ textAlign: "center", fontSize: "13px", color: "#4b5563" }}>
-          * Price is $150–$200 depending on availability. Contact us on WhatsApp for current stock.
+          * Price is $150–$200 depending on availability. Contact us for current stock.
         </p>
       </div>
 
